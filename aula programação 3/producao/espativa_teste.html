@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>esperança ativa</title>
+    <link rel="stylesheet" href="espativa_teste.css">
+</head>
+<body>
+
+
+    <nav class="topnav" id="topo">
+        <div class="logo">Esperança Ativa</div>
+        <button class="menu-toggle" id="btnMenu" aria-expanded="false">☰</button>
+        <ul class="menu-links" id="menuLinks">
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#depoimentos">Depoimentos</a></li>
+            <li><a href="#contato">Contato</a></li>
+            <li><a href="#localizacao">Onde Estamos</a></li>
+        </ul>
+    </nav>
+
+
+    <header id="servicos" class="carrossel-container">
+        <div class="carrossel-slide ativa">
+            <h1>Esperança Ativa</h1>
+            <p>Combatendo a fome no Brasil.</p>
+        </div>
+        <div class="carrossel-slide">
+            <h1>Ajude vidas, doe!</h1>
+            <p>Esperança Ativa.</p>
+        </div>
+        <button class="btn-carrossel prev" onclick="mudarSlide(-1)">❮</button>
+        <button class="btn-carrossel next" onclick="mudarSlide(1)">❯</button>
+    </header>
+
+
+    <main class="conteudo-principal">
+        
+        <section id="depoimentos" class="secao-pagina">
+            <h2>Alimentos prioritarios</h2>
+            <div class="grid-cards">
+                <article class="card">
+                    <h3>Não pereciveis</h3>
+                    <p>Produtos não perecíveis ajudam famílias em emergência.</p>
+                </article>
+                <article class="card">
+                    <h3>leite</h3>
+                    <p>Importante para crianças e idosos</p>
+                </article>
+                <article class="card">
+                    <h3>enlatados</h3>
+                    <p>aaaaaaa</p>
+                </article>
+            </div>
+        </section>
+
+        <div class="Sobre_Nós">
+            
+
+        </div>
+
+          <section class="estatisticas" id="impacto">
+    <div class="container">
+      <div class="titulo-section">        <h2 style="color:white;">Nosso Impacto</h2>        <p style="color:#d1fae5;">          Resultados alcançados graças aos voluntários.        </p>      </div>
+      <div class="stats-container">
+        <div class="stat">          <h3>000</h3>          <p>Famílias ajudadas</p>        </div>
+        <div class="stat">          <h3>000</h3>          <p>Alimentos arrecadados</p>        </div>
+        <div class="stat">          <h3>000</h3>          <p>Voluntários ativos</p>        </div>
+      </div>
+    </div>
+  </section>
+
+
+        <section id="contato" class="secao-pagina secao-fundo-claro">
+            <div class="container-formulario">
+                <h2>Para doações fale conosco</h2>
+                <p>Preencha os dados abaixo para detalhar sua necessidade.</p>
+                
+                <form id="formCadastro" class="form-cta">
+                    <div class="grupo-campo">
+                        <label for="nome">Nome Completo *</label>
+                        <input type="text" id="nome" required placeholder="Ex: João Silva">
+                    </div>
+                    
+                    <div class="grupo-campo">
+                        <label for="email">E-mail *</label>
+                        <input type="email" id="email" required placeholder="Ex: joao@empresa.com">
+                    </div>
+
+
+                    <div class="grupo-campo">
+                        <label for="assunto">Assunto Principal *</label>
+                        <input type="text" id="assunto" required placeholder="Ex: Orçamento de Sistema, Dúvida Técnica">
+                    </div>
+
+
+                    <div class="grupo-campo">
+                        <label for="mensagem">Breve descritivo do que precisa *</label>
+                        <textarea id="mensagem" rows="4" required placeholder="Conte-nos sua duvida..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-enviar">Solicitar Atendimento</button>
+                </form>
+                <div id="mensagem-sucesso" class="feedback-sucesso"></div>
+            </div>
+        </section>
+
+
+        <section id="localizacao" class="secao-pagina">
+            <h2>Onde Estamos</h2>
+            <p class="subtitulo-secao">Venha conhecer nossa central.</p>
+            
+            <div class="layout-localizacao">
+                <div class="mapa-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2471.7901395664126!2d-49.00055231446493!3d-21.126867985126545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94bc1ee25566d02b%3A0x9fb4519ca1b46b0c!2sServi%C3%A7o%20Social%20da%20Ind%C3%BAstria%20-%20SESI!5e0!3m2!1spt-BR!2sbr!4v1785243517046!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                </div>
+
+
+               
+            </div>
+        </section>
+    </main>
+
+
+    <footer class="rodape">
+        <p> &copy; 2026 Esperança Ativa - Todos os direitos reservados.</p>
+        <p>Desenvolvido para fins educacionais - Engenharia de Interface.</p>
+    </footer>
+
+
+    <button id="btnVoltarTopo" title="Voltar ao topo">⬆️</button>
+
+
+    <script src="espativa_teste.js"></script>
+
+   
+</body>
+
+</html>
+
