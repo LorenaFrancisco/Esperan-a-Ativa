@@ -157,7 +157,7 @@ section{
     border-color: var(--cor-primaria); outline: none; box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.25);
 }
 .btn-enviar {
-    background-color: var(--cor-sucesso); color: white; border: none; padding: 15px;
+    background-color: #0c700d; color: white; border: 3px; padding: 15px;
     border-radius: 4px; font-size: 18px; font-weight: bold; cursor: pointer; transition: background-color 0.3s; margin-top: 10px;
 }
 .btn-enviar:hover { background-color: #218838; }
