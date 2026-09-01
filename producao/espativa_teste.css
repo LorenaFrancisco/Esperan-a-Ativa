@@ -1,0 +1,877 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --Verde-1: #108F3C;
+    --Verde-2: #0C6D2E;
+    --Verde-3: #19592F;
+    --Verde-4: #8DA632;
+    --Verde-5: #BFB52C;
+    --Verde-claro: #c9fadb;
+    --Verde-escuro: #284131;
+
+    --Amarelo-1: #F2C029;
+    --Amarelo-2: #F5D15F;
+    --Amarelo-claro: #f7dd8a;
+    --Amarelo-escuro: #e6b000;
+
+    --escuro: #17231b;
+    --gray: #617067;
+
+    --Claro: #f7faf7;
+    --branco: #ffffff;
+
+    --border: #e2ebe4;
+
+    --shadow: 0 18px 50px rgba(22, 70, 39, 0.10);
+
+    --radius: 20px;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: var(--escuro);
+    background-color: var(--branco);
+}
+
+/* ========================================= NAVBAR ========================================= */
+/* Configuração base com transição suave */
+header {
+    position: fixed; 
+    width: 100%; 
+    top: 0; 
+    left: 0;
+    z-index: 2000;
+    padding: 20px 5%; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    transition: background 0.4s ease, padding 0.3s ease, box-shadow 0.4s ease;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+/* Estado da navbar após sair da imagem do slide */
+header.scrolled {
+    background: var(--branco); /* Fundo fica branco */
+    padding: 12px 5%; /* Fica um pouco mais compacta */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Altera a cor do texto dos links para escuro quando o fundo for branco */
+header.scrolled .nav-links a {
+    color: var(--escuro);
+}
+
+/* Hover dos links no estado escuro */
+header.scrolled .nav-links a:hover {
+    color: var(--Verde-1);
+}
+
+/* Área da Logo */
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.nav-logo:hover {
+    transform: scale(1.04); 
+}
+
+
+.nav-logo img {
+    height:70px; 
+    width: auto; 
+    object-fit: contain;
+    display: block;
+}
+
+/* Links do Menu */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.nav-links a {
+    position: relative;
+    color: var(--branco);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 6px 0;
+    transition: color 0.2s ease;
+}
+
+/* Efeito de linha subindo no hover */
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--Amarelo-1);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--Amarelo-2);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Botão Quero Doar */
+
+.nav-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 22px;
+    border-radius: 50px; /* Estilo pílula arredondado */
+    background: var(--Amarelo-1);
+    color: var(--escuro);
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(242, 192, 41, 0.3);
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav-button:hover {
+    background: var(--Amarelo-2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(242, 192, 41, 0.45);
+}
+
+/* ========================================= SLIDE DE IMAGENS ========================================= */
+
+.image-slider {
+    position: relative;
+    width: 100%;
+    height: 85vh; /* Aumenta a altura proporcionalmente à tela para não achatar */
+    min-height: 550px;
+    overflow: hidden;
+    background: #111;
+    margin: 0;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top; /* Alinha o foco do enquadramento no topo */
+    display: block;
+}
+
+.slides {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+
+.slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.45);
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.slider-button:hover {
+    background: var(--Verde-1);
+}
+
+.prev { left: 25px; }
+.next { right: 25px; }
+
+.slider-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.dot.active {
+    width: 28px;
+    border-radius: 20px;
+    background: var(--Amarelo-1);
+}
+
+/* ========================================= ESTILOS COMPARTILHADOS ========================================= */
+
+.section-tag {
+    display: inline-block;
+    color: var(--Verde-1);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.section-heading {
+    max-width: 760px;
+    margin: 0 auto 40px;
+    text-align: center;
+}
+
+.section-heading h2 {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--escuro);
+}
+
+.section-heading p {
+    color: var(--gray);
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+/* ========================================= SOBRE NÓS ========================================= */
+
+.section-tag1 {
+    display: inline-block;
+    color: var(--Verde-1);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.sobre {
+    width: 100%;
+    max-width: 100%; /* Permite expansão até a borda */
+    padding: 60px 4% 60px 2%; /* Diminui o espaçamento da esquerda para encostar mais */
+    display: grid;
+    grid-template-columns: 1.1fr 1fr; /* Dá mais espaço para a imagem no grid */
+    align-items: stretch; /* Faz a imagem esticar para acompanhar a altura do texto */
+    gap: 40px;
+}
+
+.section-imagem {
+    min-height: 100%;
+    width: 100%;
+}
+
+.espaco-imagem {
+    height: 100%;
+    min-height: 520px; /* Aumenta a altura mínima do box da foto */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    color: var(--Verde-escuro);
+    background: linear-gradient(135deg, rgba(22, 128, 58, 0.16), rgba(246, 199, 0, 0.18)), #edf7ef;
+    border: 1px dashed rgba(22, 128, 58, 0.35);
+    text-align: center;
+}
+
+.espaco-imagem span {
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.espaco-imagem small {
+    margin-top: 8px;
+    color: var(--gray);
+}
+
+.conteudo-section h2 {
+    color: var(--escuro);
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 20px;
+}
+
+.conteudo-section p {
+    color: var(--gray);
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--Verde-1);
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    margin-top: 10px;
+    transition: gap 0.2s ease;
+}
+
+.text-link:hover {
+    gap: 12px;
+    color: var(--Verde-escuro);
+}
+
+/* ========================================= IMPACTOS ========================================= */
+
+.section-tag2 {
+    display: inline-block;
+    color: var(--Verde-1);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.impact-section {
+    background: var(--Verde-claro);
+    padding: 80px 20px;
+}
+
+.impact-grid {
+    max-width: 1150px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.impact-card {
+    padding: 30px 20px;
+    text-align: center;
+    border-radius: var(--radius);
+    background: var(--branco);
+    border: 1px solid var(--border);
+}
+
+.impact-card strong {
+    display: block;
+    color: var(--Verde-1);
+    font-size: 32px;
+    margin-bottom: 5px;
+}
+
+.impact-card span {
+    color: var(--gray);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* ========================================= DOAÇÕES ========================================= */
+
+.section-tag3 {
+    display: inline-block;
+    color: var(--Verde-1);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.section-tag4 {
+    display: inline-block;
+    color: var(--Verde-1);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.donations {
+    padding: 80px 20px;
+}
+
+.donation-grid {
+    max-width: 1150px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.donation-card {
+    padding: 28px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--branco);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.donation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+}
+
+.donation-card h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: var(--escuro);
+}
+
+.donation-card p {
+    color: var(--gray);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.donation-cta {
+    max-width: 1150px;
+    margin: 55px auto 0;
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    border-radius: 24px;
+    background: var(--Amarelo-claro);
+}
+
+.donation-cta h3 {
+    margin: 5px 0;
+    font-size: 24px;
+    color: var(--escuro);
+}
+
+.donation-cta p {
+    color: var(--gray);
+    font-size: 14px;
+}
+
+.button.primary {
+    display: inline-flex;
+    padding: 14px 28px;
+    border-radius: 12px;
+    background: var(--Amarelo-1);
+    color: var(--branco);
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.button.primary:hover {
+    background: var(--Verde-escuro);
+}
+
+/* ========================================= CONTATO ========================================= */
+
+.section-tag5 {
+    display: inline-block;
+    color: var(--Verde-1);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.contact-section {
+    background: var(--Claro);
+    padding: 80px 20px;
+}
+
+.contact-container {
+    max-width: 1150px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 40px;
+}
+
+.contact-info {
+    background: var(--branco);
+    padding: 35px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.contact-info h3 {
+    font-size: 22px;
+    color: var(--escuro);
+    margin-bottom: 10px;
+}
+
+.contact-info > p {
+    color: var(--gray);
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+/* Caixa circular minimalista */
+.info-icon {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border-radius: 50%; /* Torna o fundo perfeitamente redondo */
+    background-color: rgba(46, 125, 50, 0.12); /* Verde claro transparente bem suave */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--Verde-2, #1b4332); /* Cor do ícone em verde escuro corporativo */
+    font-size: 18px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+/* Efeito Hover suave */
+.info-item:hover .info-icon {
+    background-color: var(--Amarelo-1, #f2c029); /* Destaque amarelo ao passar o mouse */
+    color: #111;
+    transform: scale(1.05);
+}
+
+.info-item strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 2px;
+}
+
+.info-item p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+/* Formulário */
+
+.contact-form {
+    background: var(--branco);
+    padding: 35px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--escuro);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--Verde-1);
+}
+
+.form-button {
+    border: none;
+    cursor: pointer;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+@media (max-width: 900px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ========================================= LOCALIZAÇÃO ========================================= */
+
+.section-tag6 {
+    display: inline-block;
+    color: var(--Verde-1);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.location-section {
+    padding: 80px 20px;
+    background: var(--branco);
+}
+
+.location-container {
+    max-width: 1150px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 30px;
+    align-items: stretch;
+}
+
+/* Container do Mapa */
+.mapa-container {
+    width: 100%;
+    height: 100%;
+    min-height: 400px; /* Garante uma altura adequada em telas menores */
+    border-radius: 16px;
+    overflow: hidden; /* Garante que o mapa respeite as bordas arredondadas */
+    display: flex;
+}
+
+/* Força o iframe a ocupar 100% da largura e altura disponível */
+.mapa-container iframe {
+    width: 100% !important;
+    height: 100% !important;
+    border: 0;
+    display: block;
+}
+
+/* Card de Detalhes */
+.location-card {
+    background: var(--Claro);
+    padding: 35px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.location-card h3 {
+    font-size: 22px;
+    color: var(--escuro);
+    margin-bottom: 20px;
+}
+
+.location-detail {
+    margin-bottom: 20px;
+}
+
+.location-detail strong {
+    display: block;
+    font-size: 14px;
+    color: var(--Verde-1);
+    margin-bottom: 4px;
+}
+
+.location-detail p {
+    font-size: 15px;
+    color: var(--gray);
+    line-height: 1.5;
+}
+
+.map-button {
+    text-align: center;
+    justify-content: center;
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+    .location-container {
+        grid-template-columns: 1fr;
+    }
+
+    .map-wrapper {
+        height: 320px;
+        min-height: auto;
+    }
+}
+
+/* ========================================= RODAPÉ ========================================= */
+
+.footer {
+    background: var(--escuro);
+    color: var(--branco);
+    padding: 60px 20px 25px;
+    width: 100%;
+}
+
+.footer-container {
+    max-width: 1150px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr; /* Força o alinhamento em 3 colunas lado a lado */
+    gap: 40px;
+    align-items: start;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-col h3.footer-logo {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--Amarelo-1);
+    margin-bottom: 14px;
+}
+
+.footer-col h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: var(--Verde-claro);
+}
+
+.footer-desc {
+    color: #a3b8ab;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Estilização das Redes (Font Awesome) */
+
+.footer-socials h4 {
+    font-size: 14px;
+    color: var(--branco);
+    margin-bottom: 10px;
+}
+
+.social-icons {
+    display: flex;
+    align-items: center;
+    gap: 18px; /* Espaço entre cada ícone */
+}
+
+.social-icons a {
+    color: var(--branco);
+    font-size: 24px; /* Tamanho dos ícones do Font Awesome */
+    text-decoration: none;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.social-icons a:hover {
+    color: var(--Amarelo-1);
+    transform: translateY(-3px) scale(1.1);
+}
+
+/* Listas de Links e Atendimento */
+
+.footer-info {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-info strong {
+    color: var(--branco);
+}
+
+/* Base do Footer */
+
+.footer-bottom {
+    max-width: 1150px;
+    margin: 25px auto 0;
+    text-align: center;
+    font-size: 13px;
+    color: #a3b8ab;
+}
+
+/* Responsividade */
+
+@media (max-width: 850px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+/* ========================================= RESPONSIVO ========================================= */
+
+@media (max-width: 900px) {
+    .sobre {
+        grid-template-columns: 1fr;
+    }
+    .impact-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .donation-grid {
+        grid-template-columns: 1fr;
+    }
+    .donation-cta {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 650px) {
+    .image-slider {
+        height: 300px;
+    }
+    .slider-button {
+        width: 38px;
+        height: 38px;
+        font-size: 17px;
+    }
+    .prev { left: 12px; }
+    .next { right: 12px; }
+    .impact-grid {
+        grid-template-columns: 1fr;
+    }
+}
